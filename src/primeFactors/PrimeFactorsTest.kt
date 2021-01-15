@@ -15,7 +15,9 @@ class PrimeFactorsTest{
         assertThat(mutableListOf(2,2), `is`(primeFactorsOf(4)))
         assertThat(mutableListOf(5), `is`(primeFactorsOf(5)))
         assertThat(mutableListOf(2,3), `is`(primeFactorsOf(6)))
-        
+        assertThat(mutableListOf(7), `is`(primeFactorsOf(7)))
+        assertThat(mutableListOf(2,2,2), `is`(primeFactorsOf(8)))
+
     }
 
     private fun primeFactorsOf(n : Int): MutableList<Int>{
@@ -23,14 +25,14 @@ class PrimeFactorsTest{
         val divider = 2
         var reminder = n
 
-        if(reminder % divider == 0 && n > divider){
+        while(reminder.isMultipleOf(divider)){
             reminder /= divider
             factors.add(divider)
-            factors.add(reminder)
-        }else{
-            factors.add(n)
         }
+        factors.add(reminder)
 
         return factors
     }
+
+    private fun Int.isMultipleOf(divider: Int) = this % divider == 0 && this > divider
 }
